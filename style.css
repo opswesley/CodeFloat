@@ -1,0 +1,340 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none; /* Impede seleção em todos os elementos */
+}
+
+/* Estilo Geral */
+body {
+  font-family: 'Roboto Mono', monospace;
+  color: #ffffff;
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #1e3c72);
+  background-size: 400% 400%; /* Aumenta o tamanho do gradiente para criar movimento */
+  animation: gradientAnimation 15s ease infinite; /* Animação suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animação do gradiente */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.app {
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  z-index: 1;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.clock-display {
+  position: relative;
+  width: 100%;
+  height: 250px; /* Aumentado o tamanho do display */
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.digital-clock {
+  font-size: 1.2rem;
+  font-family: 'Roboto Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra leve */
+  backdrop-filter: blur(0.90px); /* Efeito de desfoque */
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out; /* Transição suave */
+  white-space: pre-wrap; /* Para manter a formatação do texto */
+  line-height: 1.5; /* Espaçamento entre as linhas */
+}
+
+.digital-clock:hover {
+  /* Removido o efeito de fundo e transformação */
+  background: none; /* Remove a mudança de cor de fundo */
+  transform: none; /* Remove a elevação */
+}
+
+.digital-clock span {
+  color: cyan;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.controls button {
+  background: transparent;
+  border: 2px solid cyan;
+  color: cyan;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out; /* Transição suave */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra leve */
+}
+
+.controls button:hover {
+  background: cyan;
+  color: #000;
+  transform: translateY(-2px); /* Eleva o botão ao passar o mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+}
+
+.controls button:active {
+  transform: translateY(0); /* Volta à posição original ao clicar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Reduz a sombra */
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 0.8rem;
+}
+
+footer a {
+  color: cyan;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Ajustes específicos para o relógio binário */
+.binary-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Alinha verticalmente os elementos */
+  gap: 2px; /* Espaçamento reduzido */
+}
+
+.binary-clock span {
+  display: inline-block;
+  line-height: 1; /* Garante alinhamento vertical correto */
+}
+
+/* Estilo para o elemento de música */
+#music-info {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Fundo quase transparente */
+  color: #fff;
+  padding: 15px; /* Espaçamento maior */
+  border-radius: 15px; /* Bordas mais arredondadas */
+  font-size: 1rem; /* Tamanho de fonte maior */
+  display: none; /* Inicialmente oculto */
+  z-index: 10;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra leve */
+  backdrop-filter: blur(10px); /* Efeito de desfoque no fundo */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borda sutil */
+  animation: fadeIn 0.5s ease-in-out; /* Animação de entrada */
+  transition: all 0.3s ease-in-out; /* Transição suave */
+}
+
+/* Animação de fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilo para o texto da música */
+#music-info .music-text {
+  margin-bottom: 5px;
+  font-family: 'Roboto Mono', monospace; /* Fonte moderna */
+  letter-spacing: 0.5px; /* Espaçamento entre letras */
+}
+
+/* Estilo para os títulos (Música e Artista) */
+#music-info strong {
+  color: cyan; /* Destaca os títulos com uma cor ciano */
+}
+
+/* Efeito hover para interatividade */
+#music-info:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Fundo mais visível ao passar o mouse */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+  transform: scale(1.02); /* Aumenta ligeiramente o tamanho */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  body {
+    font-size: 0.9rem; /* Reduz o tamanho da fonte em telas menores */
+  }
+
+  .clock-display {
+    height: 200px; /* Reduz o tamanho do relógio */
+  }
+
+  .digital-clock {
+    font-size: 1rem; /* Reduz o tamanho da fonte do relógio */
+  }
+
+  .controls button {
+    font-size: 1.2rem; /* Reduz o tamanho dos botões */
+    padding: 8px 16px;
+  }
+
+  #music-info {
+    font-size: 0.8rem; /* Reduz o tamanho do texto da música */
+    padding: 10px; /* Reduz o espaçamento */
+  }
+}
+
+/* Estilo para a paleta de cores */
+#color-palette {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.palette-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.palette-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Cores/predefinições de fundo */
+.palette-btn[data-bg="gradient1"] {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.palette-btn[data-bg="gradient2"] {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+}
+
+.palette-btn[data-bg="solid1"] {
+  background: #1e3c72;
+}
+
+.palette-btn[data-bg="solid2"] {
+  background: #ff7e5f;
+}
+
+/* Classes para aplicar os backgrounds ao body */
+.gradient1 {
+  background: linear-gradient(135deg, #1e3c72, #2a5298, #1e3c72) !important;
+  background-size: 400% 400% !important;
+  animation: gradientAnimation 15s ease infinite !important;
+}
+
+.gradient2 {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff7e5f) !important;
+  background-size: 400% 400% !important;
+  animation: gradientAnimation 15s ease infinite !important;
+}
+
+.solid1 {
+  background: #1e3c72 !important;
+}
+
+.solid2 {
+  background: #ff7e5f !important;
+}
+
+/* Controles de Cores */
+#color-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 20;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Seletores de cores */
+#color-controls input[type="color"] {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none; /* Remove o estilo padrão do navegador */
+  background: none;
+}
+
+/* Controle de Blur */
+#blur-control {
+  position: fixed;
+  bottom: 100px; /* Movido mais acima */
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 20;
+}
+
+#blur-control input[type="range"] {
+  width: 150px; /* Ajusta o tamanho do controle deslizante */
+}
