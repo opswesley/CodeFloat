@@ -1,8 +1,5 @@
-// Variáveis globais
 let currentClockIndex = 0;
 let clockColor = "#00ffff"; // Cor padrão inicial do relógio
-
-// Lista de relógios
 const clocks = [
   {
     type: "minimal",
@@ -46,17 +43,17 @@ year: ${clock.year}
     style: {
       fontFamily: "'Roboto Mono', monospace",
       fontSize: "1.2rem",
-      textAlign: "center", // Centraliza o conteúdo
+      textAlign: "center",
       display: "flex",
-      justifyContent: "center", // Centraliza horizontalmente
-      alignItems: "center" // Centraliza verticalmente
+      justifyContent: "center",
+      alignItems: "center"
     }
   },
   {
     type: "countdown",
     update: function () {
       const now = new Date();
-      const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); // Meia-noite do próximo dia
+      const end = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
       const diff = Math.floor((end - now) / 1000);
       const hours = String(Math.floor(diff / 3600)).padStart(2, '0');
       const minutes = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
@@ -92,25 +89,20 @@ year: ${clock.year}
   }
 ];
 
-// Função para atualizar o relógio
 function updateClock() {
   const clockElement = document.getElementById('clock');
   const currentClock = clocks[currentClockIndex];
   clockElement.innerHTML = currentClock.update();
   Object.assign(clockElement.style, currentClock.style);
-
-  // Reaplica a cor do relógio
   clockElement.style.color = clockColor;
 }
 
-// Função para mudar o relógio
 function changeClock(direction) {
   const totalClocks = clocks.length;
   currentClockIndex += direction;
   if (currentClockIndex >= totalClocks) currentClockIndex = 0;
   if (currentClockIndex < 0) currentClockIndex = totalClocks - 1;
-
-  // Animação de transição
+  
   const clockElement = document.getElementById('clock');
   clockElement.style.animation = direction > 0 ? "slideInRight 0.3s forwards" : "slideInLeft 0.3s forwards";
   setTimeout(() => {
@@ -119,7 +111,6 @@ function changeClock(direction) {
   }, 300);
 }
 
-// Função para monitorar a música tocando no Spotify via Node.js
 function setupSpotifyListener() {
   const musicInfoElement = document.createElement('div');
   musicInfoElement.id = 'music-info';
@@ -144,7 +135,7 @@ function setupSpotifyListener() {
             </div>
           `;
           musicInfoElement.innerHTML = content;
-          musicInfoElement.style.display = 'block'; // Mostra o elemento
+          musicInfoElement.style.display = 'block';
         }
       })
       .catch((error) => {
@@ -211,7 +202,6 @@ function animate() {
 createParticles();
 animate();
 
-// Redimensionar canvas ao ajustar a janela
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -223,7 +213,6 @@ function changeBackground(bgClass) {
   document.body.classList.add(bgClass);
 }
 
-// Configura os botões da paleta de cores
 document.querySelectorAll('.palette-btn').forEach(button => {
   button.addEventListener('click', () => {
     const bgClass = button.getAttribute('data-bg');
@@ -231,10 +220,9 @@ document.querySelectorAll('.palette-btn').forEach(button => {
   });
 });
 
-// Função para aplicar cores às fontes
 document.getElementById('clock-color').addEventListener('input', (event) => {
-  clockColor = event.target.value; // Salva a cor selecionada
-  document.getElementById('clock').style.color = clockColor; // Aplica imediatamente
+  clockColor = event.target.value; 
+  document.getElementById('clock').style.color = clockColor; 
 });
 
 document.getElementById('music-color').addEventListener('input', (event) => {
@@ -248,17 +236,14 @@ document.getElementById('button-color').addEventListener('input', (event) => {
   });
 });
 
-// Função para ajustar o blur no background
 document.getElementById('blur-intensity').addEventListener('input', (event) => {
   const blurValue = `${event.target.value}px`;
   document.getElementById('background').style.filter = `blur(${blurValue})`;
 });
 
-// Inicializa o projeto
 setInterval(updateClock, 1000);
-updateClock(); // Atualiza imediatamente ao carregar a página
+updateClock();
 
-// Inicializa o listener de música
 window.addEventListener('load', () => {
   setupSpotifyListener();
 });
