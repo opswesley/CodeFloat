@@ -1,6 +1,6 @@
 # CodeFloat - Digital Clocks
 
-![CodeFloat Screenshot](https://i.postimg.cc/vBRCMzff/image.png)
+![CodeFloat Screenshot](https://i.postimg.cc/2SV3ngdf/image.png)
 
 ## Overview
 
@@ -95,7 +95,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 # CodeFloat - Relógios Digitais
 
-![Captura de Tela do CodeFloat](https://i.postimg.cc/vBRCMzff/image.png)
+![Captura de Tela do CodeFloat](https://i.postimg.cc/2SV3ngdf/image.png)
 
 ## Visão Geral
 
