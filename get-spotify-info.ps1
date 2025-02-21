@@ -6,8 +6,7 @@ if ($session) {
         $parts = $title -split " - "
         $artist = $parts[0]
         $track = $parts[1]
-
-        # Retorna um JSON válido
+        
         $output = @{
             name  = $track
             artist = $artist
@@ -15,10 +14,8 @@ if ($session) {
 
         Write-Output $output
     } else {
-        # Retorna um JSON indicando que nenhuma música está tocando
         Write-Output (@{ message = "Nenhuma música tocando." } | ConvertTo-Json)
     }
 } else {
-    # Retorna um JSON indicando que o Spotify não está aberto
     Write-Output (@{ message = "Spotify não está aberto." } | ConvertTo-Json)
 }
